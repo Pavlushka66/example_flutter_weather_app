@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter_weather/Models/weather_condition.dart';
+
+import 'weather_condition.dart';
 
 class Weather extends Equatable {
   final WeatherCondition condition;
