@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'gradient_container.dart';
@@ -12,14 +11,6 @@ class Weather extends StatefulWidget {
 }
 
 class _WeatherState extends State<Weather> {
-  Completer<void> _refreshCompleter;
-
-  @override
-  void initState() {
-    super.initState();
-    _refreshCompleter = Completer<void>();
-  }
-
   @override
   Widget build(BuildContext context) {
     final weatherBloc = BlocProvider.of<WeatherBloc>(context);
@@ -62,8 +53,6 @@ class _WeatherState extends State<Weather> {
               themeBloc.add(
                 WeatherChanged(condition: state.weather.condition),
               );
-              _refreshCompleter?.complete();
-              _refreshCompleter = Completer();
             }
           },
           builder: (context, state) {
@@ -79,14 +68,7 @@ class _WeatherState extends State<Weather> {
               return BlocBuilder<ThemeBloc, ThemeState>(
                 builder: (context, themeState) {
                   return GradientContainer(
-                    color: themeState.color,
-                    child: RefreshIndicator(
-                      onRefresh: () {
-                        weatherBloc.add(
-                          WeatherRefreshRequested(city: weather.location),
-                        );
-                        return _refreshCompleter.future;
-                      },
+                      color: themeState.color,
                       child: ListView(
                         children: <Widget>[
                           Padding(
@@ -107,9 +89,7 @@ class _WeatherState extends State<Weather> {
                             ),
                           ),
                         ],
-                      ),
-                    ),
-                  );
+                      ));
                 },
               );
             }
