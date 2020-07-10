@@ -1,11 +1,10 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'gradient_container.dart';
 
 import 'package:flutter_weather/widgets/widgets.dart';
 import 'package:flutter_weather/blocs/blocs.dart';
-import 'dart:async';
-
-import 'gradient_container.dart';
 
 class Weather extends StatefulWidget {
   @override
@@ -23,10 +22,23 @@ class _WeatherState extends State<Weather> {
 
   @override
   Widget build(BuildContext context) {
+    final weatherBloc = BlocProvider.of<WeatherBloc>(context);
+    final themeBloc = BlocProvider.of<ThemeBloc>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('Flutter Weather'),
         actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.settings),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Settings(),
+                ),
+              );
+            },
+          ),
           IconButton(
             icon: Icon(Icons.search),
             onPressed: () async {
@@ -37,8 +49,7 @@ class _WeatherState extends State<Weather> {
                 ),
               );
               if (city != null) {
-                BlocProvider.of<WeatherBloc>(context)
-                    .add(WeatherRequested(city: city));
+                weatherBloc.add(WeatherRequested(city: city));
               }
             },
           )
@@ -48,7 +59,7 @@ class _WeatherState extends State<Weather> {
         child: BlocConsumer<WeatherBloc, WeatherState>(
           listener: (context, state) {
             if (state is WeatherLoadSuccess) {
-              BlocProvider.of<ThemeBloc>(context).add(
+              themeBloc.add(
                 WeatherChanged(condition: state.weather.condition),
               );
               _refreshCompleter?.complete();
@@ -71,7 +82,7 @@ class _WeatherState extends State<Weather> {
                     color: themeState.color,
                     child: RefreshIndicator(
                       onRefresh: () {
-                        BlocProvider.of<WeatherBloc>(context).add(
+                        weatherBloc.add(
                           WeatherRefreshRequested(city: weather.location),
                         );
                         return _refreshCompleter.future;

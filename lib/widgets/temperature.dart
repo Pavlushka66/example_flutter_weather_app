@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_weather/blocs/blocs.dart';
+
 class Temperature extends StatelessWidget {
   final double temperature;
   final double low;
   final double high;
+  final TemperatureUnits units;
 
   Temperature({
     Key key,
     this.temperature,
     this.low,
     this.high,
+    this.units,
   }) : super(key: key);
 
   @override
@@ -19,7 +23,7 @@ class Temperature extends StatelessWidget {
         Padding(
           padding: EdgeInsets.only(right: 20.0),
           child: Text(
-            '${_formattedTemperature(temperature)}°',
+            _formattedTemperature(temperature),
             style: TextStyle(
               fontSize: 32,
               fontWeight: FontWeight.w600,
@@ -30,7 +34,7 @@ class Temperature extends StatelessWidget {
         Column(
           children: [
             Text(
-              'max: ${_formattedTemperature(high)}°',
+              'max: ${_formattedTemperature(high)}',
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w100,
@@ -38,7 +42,7 @@ class Temperature extends StatelessWidget {
               ),
             ),
             Text(
-              'min: ${_formattedTemperature(low)}°',
+              'min: ${_formattedTemperature(low)}',
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w100,
@@ -51,5 +55,13 @@ class Temperature extends StatelessWidget {
     );
   }
 
-  int _formattedTemperature(double t) => t.round();
+  int _toFahrenheit(double celsius) => ((celsius * 9 / 5) + 32).round();
+
+  String _formattedTemperature(double t) {
+    if (units == TemperatureUnits.fahrenheit) {
+      return '${_toFahrenheit(t)}°F';
+    } else {
+      return '${t.round()}°C';
+    }
+  }
 }
