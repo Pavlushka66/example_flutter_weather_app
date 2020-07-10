@@ -32,7 +32,9 @@ class _CitySelectionState extends State<CitySelection> {
             IconButton(
               icon: Icon(Icons.search),
               onPressed: () {
-                Navigator.pop(context, _textController.text);
+                var city = _textController.text;
+                if (city == null || city.length == 0) city = 'Chicago';
+                Navigator.pop(context, city);
               },
             )
           ],
