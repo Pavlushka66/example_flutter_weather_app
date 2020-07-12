@@ -15,7 +15,7 @@ class WeatherInitial extends WeatherState {}
 class WeatherLoadInProgress extends WeatherState {}
 
 class WeatherLoadSuccess extends WeatherState {
-  final Weather weather;
+  final WeatherModel weather;
 
   const WeatherLoadSuccess({@required this.weather}) : assert(weather != null);
 

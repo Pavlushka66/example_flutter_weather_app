@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'gradient_container.dart';
 
 import 'package:flutter_weather/widgets/widgets.dart';
 import 'package:flutter_weather/blocs/blocs.dart';
@@ -17,7 +16,7 @@ class _WeatherState extends State<Weather> {
     final themeBloc = BlocProvider.of<ThemeBloc>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Flutter Weather'),
+        title: Text('Flutter Weather'), // TODO: Move to resources
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.settings),
@@ -57,7 +56,9 @@ class _WeatherState extends State<Weather> {
           },
           builder: (context, state) {
             if (state is WeatherInitial) {
-              return Center(child: Text('Please Select a Location'));
+              return Center(
+                  child: Text(
+                      'Please Select a Location')); // TODO: Move to resources
             }
             if (state is WeatherLoadInProgress) {
               return Center(child: CircularProgressIndicator());
@@ -67,38 +68,14 @@ class _WeatherState extends State<Weather> {
 
               return BlocBuilder<ThemeBloc, ThemeState>(
                 builder: (context, themeState) {
-                  return GradientContainer(
-                      color: themeState.color,
-                      child: ListView(
-                        children: <Widget>[
-                          Padding(
-                            padding: EdgeInsets.only(top: 100.0),
-                            child: Center(
-                              child: Location(location: weather.location),
-                            ),
-                          ),
-                          Center(
-                            child: LastUpdated(dateTime: weather.lastUpdated),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(vertical: 50.0),
-                            child: Center(
-                              child: CombinedWeatherTemperature(
-                                weather: weather,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ));
+                  return WeatherInfo(weather: weather, color: themeState.color);
                 },
               );
             }
-            if (state is WeatherLoadFailure) {
-              return Text(
-                'Something went wrong!',
-                style: TextStyle(color: Colors.red),
-              );
-            }
+            return Text(
+              'Something went wrong!', // TODO: Move to resources
+              style: TextStyle(color: Colors.red),
+            );
           },
         ),
       ),

@@ -11,6 +11,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_weather/main.dart';
 
 void main() {
+  //TODO bloc tests
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(App());

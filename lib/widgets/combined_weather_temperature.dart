@@ -8,7 +8,7 @@ import 'package:flutter_weather/models/models.dart' as model;
 import 'package:flutter_weather/widgets/widgets.dart';
 
 class CombinedWeatherTemperature extends StatelessWidget {
-  final model.Weather weather;
+  final model.WeatherModel weather;
 
   CombinedWeatherTemperature({
     Key key,

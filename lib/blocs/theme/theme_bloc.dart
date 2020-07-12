@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_weather/blocs/theme_event.dart';
-import 'package:flutter_weather/blocs/theme_state.dart';
+import 'theme_event.dart';
+import 'theme_state.dart';
 import 'package:flutter_weather/models/models.dart';
 
 class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {

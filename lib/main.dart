@@ -1,11 +1,10 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_weather/simple_bloc_delegate.dart';
-import 'package:flutter_weather/repositories/repositories.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-import 'blocs/blocs.dart';
+import 'package:flutter_weather/repositories/repositories.dart';
 import 'package:flutter_weather/widgets/widgets.dart';
+import 'blocs/blocs.dart';
 
 void main() {
   final WeatherRepository weatherRepository = WeatherRepository(
@@ -14,7 +13,7 @@ void main() {
     ),
   );
 
-  BlocSupervisor.delegate = SimpleBlocDelegate();
+  BlocSupervisor.delegate = LoggingBlocDelegate();
 
   runApp(
     MultiBlocProvider(

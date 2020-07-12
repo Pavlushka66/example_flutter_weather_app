@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 
 import 'weather_condition.dart';
 
-class Weather extends Equatable {
+class WeatherModel extends Equatable {
   final WeatherCondition condition;
   final String formattedCondition;
   final double minTemp;
@@ -13,7 +13,7 @@ class Weather extends Equatable {
   final DateTime lastUpdated;
   final String location;
 
-  const Weather({
+  const WeatherModel({
     this.condition,
     this.formattedCondition,
     this.minTemp,
@@ -38,9 +38,9 @@ class Weather extends Equatable {
         location,
       ];
 
-  static Weather fromJson(dynamic json) {
+  static WeatherModel fromJson(dynamic json) {
     final consolidatedWeather = json['consolidated_weather'][0];
-    return Weather(
+    return WeatherModel(
       condition: _mapStringToWeatherCondition(
           consolidatedWeather['weather_state_abbr']),
       formattedCondition: consolidatedWeather['weather_state_name'],

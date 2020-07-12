@@ -22,7 +22,7 @@ class WeatherApiClient {
     return (locationJson.first)['woeid'];
   }
 
-  Future<Weather> fetchWeather(int locationId) async {
+  Future<WeatherModel> fetchWeather(int locationId) async {
     final weatherUrl = '$baseUrl/api/location/$locationId';
     final weatherResponse = await this.httpClient.get(weatherUrl);
 
@@ -31,6 +31,6 @@ class WeatherApiClient {
     }
 
     final weatherJson = jsonDecode(weatherResponse.body);
-    return Weather.fromJson(weatherJson);
+    return WeatherModel.fromJson(weatherJson);
   }
 }
