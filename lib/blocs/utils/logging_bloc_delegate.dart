@@ -1,6 +1,6 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class LoggingBlocDelegate extends BlocDelegate {
+class LoggingBlocObserver extends BlocObserver {
   @override
   void onEvent(Bloc bloc, Object event) {
     print('onEvent $event');

@@ -5,11 +5,7 @@ import 'theme_state.dart';
 import 'package:flutter_weather/models/models.dart';
 
 class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
-  @override
-  ThemeState get initialState => ThemeState(
-        theme: ThemeData.light(),
-        color: Colors.lightBlue,
-      );
+  ThemeBloc(ThemeState initialState) : super(initialState);
 
   @override
   Stream<ThemeState> mapEventToState(ThemeEvent event) async* {

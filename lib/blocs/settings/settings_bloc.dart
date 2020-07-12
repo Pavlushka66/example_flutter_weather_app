@@ -4,9 +4,7 @@ import 'settings_event.dart';
 import 'settings_state.dart';
 
 class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
-  @override
-  SettingsState get initialState =>
-      SettingsState(temperatureUnits: TemperatureUnits.celsius);
+  SettingsBloc(SettingsState initialState) : super(initialState);
 
   @override
   Stream<SettingsState> mapEventToState(SettingsEvent event) async* {

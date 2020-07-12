@@ -13,16 +13,21 @@ void main() {
     ),
   );
 
-  BlocSupervisor.delegate = LoggingBlocDelegate();
+  Bloc.observer = LoggingBlocObserver();
 
   runApp(
     MultiBlocProvider(
       providers: [
         BlocProvider<ThemeBloc>(
-          create: (context) => ThemeBloc(),
+          create: (context) => ThemeBloc(ThemeState(
+            theme: ThemeData.light(),
+            color: Colors.lightBlue,
+          )),
         ),
         BlocProvider<SettingsBloc>(
-          create: (context) => SettingsBloc(),
+          create: (context) =>
+              SettingsBloc(
+                  SettingsState(temperatureUnits: TemperatureUnits.celsius)),
         ),
       ],
       child: App(weatherRepository: weatherRepository),
@@ -46,7 +51,8 @@ class App extends StatelessWidget {
           theme: themeState.theme,
           home: BlocProvider(
             create: (context) =>
-                WeatherBloc(weatherRepository: weatherRepository),
+                WeatherBloc(
+                    WeatherInitial(), weatherRepository: weatherRepository),
             child: Weather(),
           ),
         );
