@@ -119,7 +119,7 @@ packages:
       name: equatable
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.2.0"
+    version: "1.2.2"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -311,7 +311,7 @@ packages:
       name: provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.3.0"
+    version: "4.3.1"
   pub_semver:
     dependency: transitive
     description:
@@ -409,7 +409,7 @@ packages:
     source: hosted
     version: "1.1.0"
   test:
-    dependency: transitive
+    dependency: "direct dev"
     description:
       name: test
       url: "https://pub.dartlang.org"
